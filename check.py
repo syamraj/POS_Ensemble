@@ -36,6 +36,45 @@ def accuracy_pos(testdata_completelist, testdata_gold_completelist):
             accuracy = float(tp)/float(tp + fn)
         return accuracy
 
+def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelist):
+    for i in range(len(testdata_complete)):
+        tp = 0
+        fpos = 0
+        fn = 0
+        testdata_line_chunks = testdata_completelist[i].split(' ')
+        testdata_gold_line_chunks = testdata_gold_completelist[i].split(' ')
+        print len(testdata_line_chunks)
+        print len(testdata_gold_line_chunks)
+        if len(testdata_line_chunks) != len(testdata_gold_line_chunks):
+            print "line number ", i , "in the file not in sync"
+        else:
+            for j in range(len(testdata_line_chunks)):
+                if testdata_line_chunks[j].split('_')[0] == testdata_gold_line_chunks[j].split('/')[0]:
+                    print testdata_line_chunks[j].split('_')[0] +'............'+testdata_gold_line_chunks[j].split('/')[0]
+                    print testdata_line_chunks[j].split('_')[1]
+                    print testdata_gold_line_chunks[j].split('/')[1]
+                    if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                        tp = tp+1
+                        print "tp incremented"
+                    else:
+                        text_for_correction = testdata_line_chunks[j].split('_')[1][-3:] + \
+                                              testdata_line_chunks[j-1].split('_')[0] + \
+                                              testdata_line_chunks[j-1].split('_')[1]
+                        X_train_counts1 = count_vect.transform(text_for_correction)
+                        X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
+                        new_tag = clf.predict(X_tfidf1.toarray())
+                        new_wrd_tag_pair = testdata_line_chunks[j].split('_')[0] + '_' + new_tag[0]
+                        testdata_completelist[i].replace(testdata_line_chunks[j], new_wrd_tag_pair)
+                        testdata_line_chunks[j] = new_wrd_tag_pair
+                        print "############", new_wrd_tag_pair
+                        if testdata_line_chunks[j].split('_')[1] != testdata_gold_line_chunks[j].split('/')[1]:
+                            fpos = fpos + 1
+                            fn = fn + 1
+            print "tp = ", tp
+            print "fn = ", fn
+            accuracy = float(tp)/float(tp + fn)
+        return accuracy
+
 def pos_features(sentence, i, history):
     features = ''
     features += sentence[i][-3:]
@@ -113,3 +152,5 @@ with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
     for line in fp:
         testdata_gold_complete.append(line)
 print accuracy_pos(testdata_complete, testdata_gold_complete)
+print "..........................................................................................................."
+print accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete)
