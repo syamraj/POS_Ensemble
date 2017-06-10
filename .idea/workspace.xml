@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="180ae7d3-27ce-4951-b491-5f5f3bd129fe" name="Default" comment="">
+    <list default="true" id="180ae7d3-27ce-4951-b491-5f5f3bd129fe" name="Default" comment="map + multiple text line">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/check.py" afterPath="$PROJECT_DIR$/check.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/correctionModel_Bagging.py" afterPath="$PROJECT_DIR$/correctionModel_Bagging.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.txt" afterPath="$PROJECT_DIR$/output.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,7 +39,7 @@
       <file leaf-file-name="check.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
+            <state relative-caret-position="1254">
               <caret line="154" column="19" lean-forward="true" selection-start-line="154" selection-start-column="19" selection-end-line="154" selection-end-column="19" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -347,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496673118616</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="map + multiple text line">
+      <created>1497097892646</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1497097892646</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -400,7 +404,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added accuracy + combined bagging model(only training)" />
     <MESSAGE value="with the call made to accuracy model the accuracy has increased a bit" />
-    <option name="LAST_COMMIT_MESSAGE" value="with the call made to accuracy model the accuracy has increased a bit" />
+    <MESSAGE value="map + multiple text line" />
+    <option name="LAST_COMMIT_MESSAGE" value="map + multiple text line" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -699,7 +704,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/check.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="1254">
           <caret line="154" column="19" lean-forward="true" selection-start-line="154" selection-start-column="19" selection-end-line="154" selection-end-column="19" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
