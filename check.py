@@ -2,11 +2,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 import nltk
-
 import opennlp
 
 pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent.bin")
 
+accracy_list_before_correction = []
+accuracy_list_after_correction = []
+map_list = []
 
 def accuracy_pos(testdata_completelist, testdata_gold_completelist):
     for i in range(len(testdata_complete)):
@@ -34,9 +36,10 @@ def accuracy_pos(testdata_completelist, testdata_gold_completelist):
             print "tp = ", tp
             print "fn = ", fn
             accuracy = float(tp)/float(tp + fn)
-        return accuracy
+            accracy_list_before_correction.append(accuracy)
+    return accuracy
 
-def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelist):
+def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelist, map_list):
     for i in range(len(testdata_complete)):
         tp = 0
         fpos = 0
@@ -52,7 +55,7 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
                 if testdata_line_chunks[j].split('_')[0] == testdata_gold_line_chunks[j].split('/')[0]:
                     print testdata_line_chunks[j].split('_')[0] +'............'+testdata_gold_line_chunks[j].split('/')[0]
                     print testdata_line_chunks[j].split('_')[1]
-                    print testdata_gold_line_chunks[j].split('/')[1]
+                    print "gold", testdata_gold_line_chunks[j].split('/')[1]
                     if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
                         tp = tp+1
                         print "tp incremented"
@@ -66,14 +69,21 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
                         new_wrd_tag_pair = testdata_line_chunks[j].split('_')[0] + '_' + new_tag[0]
                         testdata_completelist[i].replace(testdata_line_chunks[j], new_wrd_tag_pair)
                         testdata_line_chunks[j] = new_wrd_tag_pair
-                        print "############", new_wrd_tag_pair
+                        for line in map_list:
+                            if testdata_line_chunks[j].split('_')[0] == line.split('_')[0]:
+                                testdata_line_chunks[j] = line[:-1]
+                        print "############", testdata_line_chunks[j]
                         if testdata_line_chunks[j].split('_')[1] != testdata_gold_line_chunks[j].split('/')[1]:
                             fpos = fpos + 1
                             fn = fn + 1
+                        if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                            tp = tp + 1
+                            print "tp incremented"
             print "tp = ", tp
             print "fn = ", fn
             accuracy = float(tp)/float(tp + fn)
-        return accuracy
+            accuracy_list_after_correction.append(accuracy)
+    return accuracy
 
 def pos_features(sentence, i, history):
     features = ''
@@ -95,9 +105,6 @@ def processing(train_sents):
             train_set_tags.append(tag)
             # train_set.append((featureset, tag))
             history.append(tag)
-
-def correction_model():
-    print "to be added"
 
 Tag_list = []
 Per_tag_acc_list = []
@@ -148,9 +155,19 @@ with open('/home/devil/Thesis/testdata.txt','rU') as fp:
     for line in fp:
         line2 = pos.parse(line)
         testdata_complete.append(line2)
+
+with open('/home/devil/Thesis/map.txt', 'rU') as fp:
+    for line in fp:
+        map_list.append(line)
+
 with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
     for line in fp:
         testdata_gold_complete.append(line)
+print testdata_complete
+print testdata_gold_complete
 print accuracy_pos(testdata_complete, testdata_gold_complete)
 print "..........................................................................................................."
-print accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete)
+print accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete, map_list)
+
+print "printing the result", accracy_list_before_correction
+print "printing the result after corretion", accuracy_list_after_correction
