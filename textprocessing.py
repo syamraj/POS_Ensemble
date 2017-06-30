@@ -15,10 +15,11 @@ with open('Genia_text.txt','rU') as fp:
             # list1.append(line)
         #     line1 = ''
         else:
+            # print type(line1)
             file.write(line1+'\n')
             line1 = ''
             # line1 = line1 + ' ' + line.strip('\n')
-# file.close()
+file.close()
 
 
 

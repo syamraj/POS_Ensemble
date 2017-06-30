@@ -30,7 +30,7 @@ def accuracy_pos(testdata_completelist, testdata_gold_completelist):
                           testdata_gold_line_chunks[j].split('/')[0]
                     print testdata_line_chunks[j].split('_')[1]
                     print testdata_gold_line_chunks[j].split('/')[1]
-                    if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                    if testdata_line_chunks[j].split('_')[1].lower() == testdata_gold_line_chunks[j].split('/')[1].lower():
                         tp = tp + 1
                         print "tp incremented"
                     else:
@@ -62,7 +62,7 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
                           testdata_gold_line_chunks[j].split('/')[0]
                     print testdata_line_chunks[j].split('_')[1]
                     print "gold", testdata_gold_line_chunks[j].split('/')[1]
-                    if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                    if testdata_line_chunks[j].split('_')[1].lower() == testdata_gold_line_chunks[j].split('/')[1].lower():
                         tp = tp + 1
                         print "tp incremented"
                     else:
@@ -82,7 +82,7 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
                         if testdata_line_chunks[j].split('_')[1] != testdata_gold_line_chunks[j].split('/')[1]:
                             fpos = fpos + 1
                             fn = fn + 1
-                        if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                        if testdata_line_chunks[j].split('_')[1].lower() == testdata_gold_line_chunks[j].split('/')[1].lower():
                             tp = tp + 1
                             print "tp incremented"
             print "tp = ", tp
@@ -168,7 +168,7 @@ clf.fit(X_tfidf.toarray(), y_train)
 # print(clf.score(X_tfidf1.toarray(), y_test))
 
 # with open('/home/devil/Thesis/testdata.txt','rU') as fp:
-with open('testdata.txt', 'rU') as fp:
+with open('/home/devil/Thesis/brown_sample.txt', 'rU') as fp:
     for line in fp:
         line2 = pos.parse(line[:-1])
         testdata_complete.append(line2.rstrip())
@@ -178,7 +178,7 @@ with open('/home/devil/Thesis/map.txt', 'rU') as fp:
         map_list.append(line)
 
 # with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
-with open('testdata_gold.txt', 'rU') as fp:
+with open('/home/devil/Thesis/brown_sample_gold.txt', 'rU') as fp:
     for line in fp:
         testdata_gold_complete.append(line[:-1].rstrip())
 print testdata_complete
