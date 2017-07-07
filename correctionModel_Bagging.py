@@ -45,8 +45,8 @@ with open('output.txt', 'rU') as fp:
 
 processing(train_sents)
 
-train_set_featureset = train_set_featureset[:500]
-train_set_tags = train_set_tags[:500]
+# train_set_featureset = train_set_featureset[:500]
+# train_set_tags = train_set_tags[:500]
 
 n_split = int(len(train_set_featureset) * .7)
 
@@ -64,12 +64,15 @@ X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 X_train_counts1 = count_vect.transform(X_test)
 X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
 
-clf = RandomForestClassifier(n_estimators=10)
-clf.fit(X_tfidf.toarray(), y_train)
+clf = RandomForestClassifier(max_depth=100, n_estimators=3000)
+print X_tfidf.shape
+# print X_tfidf.toarray().shape
+clf.fit(X_tfidf, y_train)
 
-print(clf.score(X_tfidf1.toarray(), y_test))
+print(clf.score(X_tfidf1, y_test))
 
-X_train_counts2 = count_vect.transform("eneIL-2NN")
-X_tfidf2 = tfidf_transformer.transform(X_train_counts1)
+# X_train_counts2 = count_vect.transform("eneIL-2NN")
+# X_tfidf2 = tfidf_transformer.transform(X_train_counts1)
 
-print(clf.predict(X_tfidf2.toarray()))
+# print X_tfidf2.shape
+# print X_tfidf2.toarray().shape

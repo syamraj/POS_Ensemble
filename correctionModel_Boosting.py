@@ -74,7 +74,9 @@ tfidf_transformer = TfidfTransformer()
 X_train_counts = count_vect.fit_transform(X_train)
 X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
-X_train_counts1 = count_vect.transform(X_test)
+print X_test
+sample = ['ncysimianJJ']
+X_train_counts1 = count_vect.transform(sample)
 X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
 
 bdt_real = AdaBoostClassifier(
@@ -88,8 +90,8 @@ bdt_real = AdaBoostClassifier(
 #     learning_rate=1.5,
 #     algorithm="SAMME")
 
-bdt_real.fit(X_tfidf.toarray(), y_train)
+bdt_real.fit(X_tfidf, y_train)
 # bdt_discrete.fit(X_tfidf, y_train)
 
-print bdt_real.score(X_tfidf1.toarray(), y_test)
-# print bdt_discrete.predict(testToVec)
+# print bdt_real.score(X_tfidf1, y_test)
+print bdt_real.predict(X_tfidf1)
