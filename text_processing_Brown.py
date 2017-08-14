@@ -1,9 +1,14 @@
 list_brown = []
 
-file = open('testdata_Brown_processed','wt')
-with open('testdata_Brown.txt','rU') as fp:
+file = open('stack_testdata_Brown_gold','wt')
+with open('/home/devil/Thesis/brown/ca01','rU') as fp:
     for line in fp:
-        line1 = ''
-        for words in line.split(' '):
-            line1 = line1 + words.split('/')[0] + ' '
-        file.write(line1+'\n')
+        line = line.lstrip().rstrip().rstrip('\n')
+        line = line.replace('/', '_')
+        if line != '':
+            # print line
+            file.write(line + '\n')
+        # line1 = ''
+        # for words in line.split(' '):
+        #     line1 = line1 + words.split('/')[0] + ' '
+        # file.write(line+'\n')

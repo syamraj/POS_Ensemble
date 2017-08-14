@@ -75,9 +75,10 @@ X_train_counts = count_vect.fit_transform(X_train)
 X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 print X_test
-sample = ['ncysimianJJ']
+sample = ['ncysimianJJ', 'virusNN', 'howassaysLS']
 X_train_counts1 = count_vect.transform(sample)
 X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
+print X_tfidf1.shape
 
 bdt_real = AdaBoostClassifier(
     DecisionTreeClassifier(max_depth=2),
@@ -92,6 +93,7 @@ bdt_real = AdaBoostClassifier(
 
 bdt_real.fit(X_tfidf, y_train)
 # bdt_discrete.fit(X_tfidf, y_train)
-
 # print bdt_real.score(X_tfidf1, y_test)
 print bdt_real.predict(X_tfidf1)
+print 'X data', X_tfidf1
+print 'decision score', bdt_real.fit(X_tfidf, y_train).decision_function(X_tfidf1)

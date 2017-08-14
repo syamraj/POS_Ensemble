@@ -1,36 +1,69 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+import numpy as np
 
 import nltk
+from sklearn.multiclass import OneVsRestClassifier
+
 import opennlp
 
 pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent.bin")
 
-accracy_list_before_correction = []
-accuracy_list_after_correction = []
+f1_overall_before_correction_list = []
+f1_overall_after_correction_list = []
 map_list = []
+predicted_class = []
+predicted_class_list = []
 
-overall_tpos_before_correction = 0
-overall_fpos_before_correction = 0
-overall_fn_before_correction = 0
 
-overall_tpos_after_correction = 0
-overall_fpos_after_correction = 0
-overall_fn_after_correction = 0
+def initialize():
+    global accracy_list_before_correction
+    global accuracy_list_after_correction
 
-f1_overall_before_correction = 0
-f1_overall_after_correction = 0
+    global overall_tpos_before_correction
+    global overall_fpos_before_correction
+    global overall_fn_before_correction
+
+    global overall_tpos_after_correction
+    global overall_fpos_after_correction
+    global overall_fn_after_correction
+
+    global f1_overall_before_correction
+    global f1_overall_after_correction
+
+    global predicted_class
+    global predicted_class_list
+
+
+
+    accracy_list_before_correction = []
+    accuracy_list_after_correction = []
+
+    overall_tpos_before_correction = 0
+    overall_fpos_before_correction = 0
+    overall_fn_before_correction = 0
+
+    overall_tpos_after_correction = 0
+    overall_fpos_after_correction = 0
+    overall_fn_after_correction = 0
+
+    f1_overall_before_correction = 0
+    f1_overall_after_correction = 0
+
+    predicted_class = []
+    predicted_class_list = []
+
 
 def accuracy_pos(testdata_completelist, testdata_gold_completelist):
     for i in range(len(testdata_complete)):
-        tp = 0
-        fpos = 0
-        fn = 0
         global overall_tpos_before_correction
         global overall_fpos_before_correction
         global overall_fn_before_correction
-        global f1_overall_before_correction
+        tp = 0
+        fpos = 0
+        fn = 0
         testdata_line_chunks = testdata_completelist[i].split(' ')
         testdata_gold_line_chunks = testdata_gold_completelist[i].split(' ')
         print len(testdata_line_chunks)
@@ -39,12 +72,14 @@ def accuracy_pos(testdata_completelist, testdata_gold_completelist):
             print "line number ", i, "in the file not in sync"
         else:
             for j in range(len(testdata_line_chunks)):
-                if testdata_line_chunks[j].split('_')[0] == testdata_gold_line_chunks[j].split('/')[0]:
+                if testdata_line_chunks[j].split('_')[0].upper() == \
+                        testdata_gold_line_chunks[j].split('/')[0].upper():
                     print testdata_line_chunks[j].split('_')[0] + '............' + \
                           testdata_gold_line_chunks[j].split('/')[0]
                     print testdata_line_chunks[j].split('_')[1]
                     print testdata_gold_line_chunks[j].split('/')[1]
-                    if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                    if testdata_line_chunks[j].split('_')[1].upper() == \
+                            testdata_gold_line_chunks[j].split('/')[1].upper():
                         tp = tp + 1
                         overall_tpos_before_correction = overall_tpos_before_correction + 1
                         print "tp incremented"
@@ -56,9 +91,6 @@ def accuracy_pos(testdata_completelist, testdata_gold_completelist):
             print "tp = ", tp
             print "fn = ", fn
             accuracy = float(tp*2) / float(2*tp + fn + fpos)
-            f1_overall_before_correction = float(overall_tpos_before_correction * 2) / \
-                                           float(2 * overall_tpos_before_correction + overall_fn_before_correction
-                                                 + overall_fpos_before_correction)
             accracy_list_before_correction.append(accuracy)
     return accuracy
 
@@ -72,7 +104,6 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
         global overall_tpos_after_correction
         global overall_fpos_after_correction
         global overall_fn_after_correction
-        global f1_overall_after_correction
         testdata_line_chunks = testdata_completelist[i].split(' ')
         testdata_gold_line_chunks = testdata_gold_completelist[i].split(' ')
         print len(testdata_line_chunks)
@@ -81,36 +112,44 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
             print "line number ", i, "in the file not in sync"
         else:
             for j in range(len(testdata_line_chunks)):
-                if testdata_line_chunks[j].split('_')[0] == testdata_gold_line_chunks[j].split('/')[0]:
+                if testdata_line_chunks[j].split('_')[0].upper() == \
+                        testdata_gold_line_chunks[j].split('/')[0].upper():
                     print testdata_line_chunks[j].split('_')[0] + '............' + \
                           testdata_gold_line_chunks[j].split('/')[0]
                     print testdata_line_chunks[j].split('_')[1]
                     print "gold", testdata_gold_line_chunks[j].split('/')[1]
-                    if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                    if testdata_line_chunks[j].split('_')[1].upper() == \
+                            testdata_gold_line_chunks[j].split('/')[1].upper():
                         tp = tp + 1
                         overall_tpos_after_correction = overall_tpos_after_correction + 1
                         print "tp incremented"
                     else:
-                        text_for_correction = testdata_line_chunks[j].split('_')[1][-3:] + \
+                        text_for_correction = testdata_line_chunks[j].split('_')[0][-3:] + \
                                               testdata_line_chunks[j - 1].split('_')[0] + \
                                               testdata_line_chunks[j - 1].split('_')[1]
                         text_for_correction_list = [text_for_correction]
                         X_train_counts1 = count_vect.transform(text_for_correction_list)
                         X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
                         new_tag = clf.predict(X_tfidf1)
+                        predicted_class_list.append(new_tag)
+                        if not predicted_class.__contains__(new_tag):
+                            predicted_class.append(new_tag)
                         new_wrd_tag_pair = testdata_line_chunks[j].split('_')[0] + '_' + new_tag[0]
                         testdata_completelist[i].replace(testdata_line_chunks[j], new_wrd_tag_pair)
                         testdata_line_chunks[j] = new_wrd_tag_pair
                         for line in map_list:
-                            if testdata_line_chunks[j].split('_')[0] == line.split('_')[0]:
+                            if testdata_line_chunks[j].split('_')[0].upper() == \
+                                    line.split('_')[0].upper():
                                 testdata_line_chunks[j] = line[:-1]
                         print "############", testdata_line_chunks[j]
-                        if testdata_line_chunks[j].split('_')[1] != testdata_gold_line_chunks[j].split('/')[1]:
+                        if testdata_line_chunks[j].split('_')[1].upper() != \
+                                testdata_gold_line_chunks[j].split('/')[1].upper():
                             fpos = fpos + 1
                             overall_fpos_after_correction = overall_fpos_after_correction + 1
                             fn = fn + 1
                             overall_fn_after_correction = overall_fn_after_correction + 1
-                        if testdata_line_chunks[j].split('_')[1] == testdata_gold_line_chunks[j].split('/')[1]:
+                        if testdata_line_chunks[j].split('_')[1].upper() == \
+                                testdata_gold_line_chunks[j].split('/')[1].upper():
                             tp = tp + 1
                             overall_tpos_after_correction = overall_tpos_after_correction
                             print "tp incremented"
@@ -118,10 +157,6 @@ def accuracy_pos_withcorrection(testdata_completelist, testdata_gold_completelis
             print "fn = ", fn
             accuracy = float(tp)*2 / float(2*tp + fn + fpos)
             accuracy_list_after_correction.append(accuracy)
-            f1_overall_after_correction = float(overall_tpos_after_correction * 2) / float(
-                2 * overall_tpos_after_correction
-                + overall_fn_after_correction
-                + overall_fpos_after_correction)
             print '@@@@@@@@@@@@@@@@@@@@@@@@@@@', testdata_line_chunks
     # line = ''
     #         for processedwords in testdata_line_chunks:
@@ -155,95 +190,116 @@ def processing(train_sents):
             history.append(tag)
 
 
-Tag_list = []
-Per_tag_acc_list = []
-testdata_complete = []
-testdata_gold_complete = []
+training_data_size = [10000]
 
-train_set_featureset = []
-train_set_tags = []
-history = []
+# for training_data_size_iterator in range(len(training_data_size)):
+for training_data_size_iterator in range(len(training_data_size)):
+    initialize()
+    Tag_list = []
+    Per_tag_acc_list = []
+    testdata_complete = []
+    testdata_gold_complete = []
 
-train_sents = []
-with open('output.txt', 'rU') as fp:
-    for line in fp:
-        str = line.split(' ')
-        listEachLine = []
-        for i in str[:-1]:
-            if i.__contains__('_'):
-                listEachLine.append((i.split('_')[0], i.split('_')[1]))
-        train_sents.append(listEachLine)
+    train_set_featureset = []
+    train_set_tags = []
+    history = []
 
-processing(train_sents)
+    train_sents = []
+    with open('output.txt', 'rU') as fp:
+        for line in fp:
+            str = line.split(' ')
+            listEachLine = []
+            for i in str[:-1]:
+                if i.__contains__('_'):
+                    listEachLine.append((i.split('_')[0], i.split('_')[1]))
+            train_sents.append(listEachLine)
 
-train_set_featureset = train_set_featureset[:500]
-train_set_tags = train_set_tags[:500]
+    processing(train_sents)
 
-n_split = int(len(train_set_featureset) * .7)
+    train_set_featureset = train_set_featureset[:training_data_size[training_data_size_iterator]]
+    train_set_tags = train_set_tags[:training_data_size[training_data_size_iterator]]
 
-X_train = train_set_featureset[:n_split]
-y_train = train_set_tags[:n_split]
+    n_split = int(len(train_set_featureset) * .7)
 
-print X_train[0]
+    X_train = train_set_featureset[:n_split]
+    y_train = train_set_tags[:n_split]
 
-count_vect = CountVectorizer()
-tfidf_transformer = TfidfTransformer()
 
-X_train_counts = count_vect.fit_transform(X_train)
-X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
+    count_vect = CountVectorizer()
+    tfidf_transformer = TfidfTransformer()
+
+    X_train_counts = count_vect.fit_transform(X_train)
+    X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 # X_train_counts1 = count_vect.transform(X_test)
 # X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
 
-clf = RandomForestClassifier(n_estimators=10)
-clf.fit(X_tfidf, y_train)
+    # clf = OneVsRestClassifier(RandomForestClassifier(n_estimators=10))
+    clf = RandomForestClassifier(n_estimators=10)
+    clf.fit(X_tfidf, y_train)
 
 # print(clf.score(X_tfidf1.toarray(), y_test))
 
 # with open('/home/devil/Thesis/testdata.txt','rU') as fp:
-with open('testdata.txt', 'rU') as fp:
-    for line in fp:
-        line2 = pos.parse(line[:-1])
-        testdata_complete.append(line2.rstrip())
+    with open('testdata.txt', 'rU') as fp:
+        for line in fp:
+            line2 = pos.parse(line[:-1])
+            testdata_complete.append(line2.rstrip())
 
-with open('/home/devil/Thesis/map.txt', 'rU') as fp:
-    for line in fp:
-        map_list.append(line)
+    with open('/home/devil/Thesis/map.txt', 'rU') as fp:
+        for line in fp:
+            map_list.append(line)
 
 # with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
-with open('testdata_gold.txt', 'rU') as fp:
-    for line in fp:
-        testdata_gold_complete.append(line[:-1].rstrip())
-print testdata_complete
-print testdata_gold_complete
-print accuracy_pos(testdata_complete, testdata_gold_complete)
-print "..........................................................................................................."
-print accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete, map_list)
+    with open('testdata_gold.txt', 'rU') as fp:
+        for line in fp:
+            testdata_gold_complete.append(line[:-1].rstrip())
+    print testdata_complete
+    print testdata_gold_complete
+    print 'accuracy before correction', accuracy_pos(testdata_complete, testdata_gold_complete)
+    print "..........................................................................................................."
+    print 'accuracy after correction', accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete, map_list)
 
-print "printing the result", accracy_list_before_correction
-print "printing the result after correction", accuracy_list_after_correction
+    f1_overall_before_correction = float(overall_tpos_before_correction * 2) / \
+                                   float(2 * overall_tpos_before_correction + overall_fn_before_correction
+                                         + overall_fpos_before_correction)
+    f1_overall_before_correction_list.append(f1_overall_before_correction)
 
-print "length of accuracy list before correction", len(accracy_list_before_correction)
-print "length of accuracy list after correction", len(accuracy_list_after_correction)
+    f1_overall_after_correction = float(overall_tpos_after_correction * 2) / float(
+        2 * overall_tpos_after_correction
+        + overall_fn_after_correction
+        + overall_fpos_after_correction)
+    f1_overall_after_correction_list.append(f1_overall_after_correction)
 
-print "overall F1 score after correction", f1_overall_after_correction
-print "overall F1 score before correction", f1_overall_before_correction
+    print "printing the result", accracy_list_before_correction
+    print "printing the result after correction", accuracy_list_after_correction
 
-# plt.plot(accracy_list_before_correction , 'ro')
-# plt.ylabel('accuracy before applying the correction model')
-# plt.show()
+    print "length of accuracy list before correction", len(accracy_list_before_correction)
+    print "length of accuracy list after correction", len(accuracy_list_after_correction)
+
+    print "overall F1 score after correction", f1_overall_after_correction
+    print "overall F1 score before correction", f1_overall_before_correction
+
+# plot of the accuracy per sentances
+
+# f, (ax1, ax2) = plt.subplots(2, sharex=True, sharey=True)
 #
-#
-# plt.plot(accuracy_list_after_correction , 'go')
-# plt.ylabel('accuracy after applying the correction model')
+# ax1.plot(accracy_list_before_correction, 'ro')
+# ax1.set_title('accuracy before correction')
+# ax2.plot(accuracy_list_after_correction, 'go')
+# ax2.set_title('accuracy after correction')
+# f.subplots_adjust(hspace=0)
+# plt.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
 # plt.show()
 
-f, (ax1, ax2) = plt.subplots(2, sharex=True, sharey=True)
-
-ax1.plot(accracy_list_before_correction, 'ro')
-ax1.set_title('accuracy before correction')
-ax2.plot(accuracy_list_after_correction, 'go')
-ax2.set_title('accuracy after correction')
-f.subplots_adjust(hspace=0)
-plt.setp([a.get_xticklabels() for a in f.axes[:-1]], visible=False)
-plt.show()
+# plot of the accuracies with increase in the training data
+print 'length of training data size', len(training_data_size)
+print 'length of f1_overall_after_correction', len(f1_overall_after_correction_list)
+# x = np.array(training_data_size)
+# y = np.array(f1_overall_after_correction_list)
+# f = interp1d(x, y)
+# f2 = interp1d(x, y, kind='cubic')
+# xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
+# plt.plot(x, y, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
+# plt.legend(['data', 'linear', 'cubic'], loc='best')
+# plt.show()
