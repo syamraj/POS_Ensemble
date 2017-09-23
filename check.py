@@ -9,7 +9,8 @@ from sklearn.multiclass import OneVsRestClassifier
 
 import opennlp
 
-pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent.bin")
+# pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent.bin")
+pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent-brown.bin")
 
 f1_overall_before_correction_list = []
 f1_overall_after_correction_list = []
@@ -190,7 +191,8 @@ def processing(train_sents):
             history.append(tag)
 
 
-training_data_size = [10000]
+# training_data_size = [4000, 8000, 10000, 15000, 20000]
+training_data_size = [500, 4000, 8000, 10000, 15000, 20000]
 
 # for training_data_size_iterator in range(len(training_data_size)):
 for training_data_size_iterator in range(len(training_data_size)):
@@ -205,7 +207,12 @@ for training_data_size_iterator in range(len(training_data_size)):
     history = []
 
     train_sents = []
-    with open('output.txt', 'rU') as fp:
+
+    file_list = ['stack_testdata_Brown_gold', 'output.txt']
+    Genia_files = ['testdata.txt', 'testdata_gold.txt']
+    Brown_files = ['testdata_brown_based_on_stack_testdata.txt',
+                   'testdata_brown_based_on_stack_testdata_gold.txt']
+    with open(file_list[0], 'rU') as fp:
         for line in fp:
             str = line.split(' ')
             listEachLine = []
@@ -241,7 +248,8 @@ for training_data_size_iterator in range(len(training_data_size)):
 # print(clf.score(X_tfidf1.toarray(), y_test))
 
 # with open('/home/devil/Thesis/testdata.txt','rU') as fp:
-    with open('testdata.txt', 'rU') as fp:
+    #with open(Genia_files[0], 'rU') as fp:
+    with open(Brown_files[0], 'rU') as fp:
         for line in fp:
             line2 = pos.parse(line[:-1])
             testdata_complete.append(line2.rstrip())
@@ -251,7 +259,8 @@ for training_data_size_iterator in range(len(training_data_size)):
             map_list.append(line)
 
 # with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
-    with open('testdata_gold.txt', 'rU') as fp:
+    #with open(Genia_files[1], 'rU') as fp:
+    with open(Brown_files[1], 'rU') as fp:
         for line in fp:
             testdata_gold_complete.append(line[:-1].rstrip())
     print testdata_complete
@@ -295,11 +304,19 @@ for training_data_size_iterator in range(len(training_data_size)):
 # plot of the accuracies with increase in the training data
 print 'length of training data size', len(training_data_size)
 print 'length of f1_overall_after_correction', len(f1_overall_after_correction_list)
-# x = np.array(training_data_size)
-# y = np.array(f1_overall_after_correction_list)
-# f = interp1d(x, y)
-# f2 = interp1d(x, y, kind='cubic')
-# xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
-# plt.plot(x, y, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
-# plt.legend(['data', 'linear', 'cubic'], loc='best')
-# plt.show()
+print 'f1_overall_after_correction', f1_overall_after_correction_list
+x = np.array(training_data_size)
+y = np.array(f1_overall_after_correction_list)
+f_b = interp1d(x, y)
+f1_b = interp1d(x, y)
+f2_b = interp1d(x, y, kind='cubic')
+x1 = np.array(training_data_size)
+y1 = np.array(f1_overall_before_correction_list)
+f = interp1d(x1, y1)
+f1 = interp1d(x1, y1)
+f2 = interp1d(x1, y1, kind='cubic')
+xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
+plt.plot(x, y, 'o', xnew, f_b(xnew), '-', xnew, f2_b(xnew), '--')
+plt.plot(x1, y1, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
+plt.legend(['data', 'linear', 'cubic'], loc='best')
+plt.show()

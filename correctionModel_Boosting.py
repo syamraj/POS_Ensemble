@@ -58,10 +58,10 @@ processing(train_sents)
 # print train_set_featureset
 # print train_set_tags
 
-train_set_featureset = train_set_featureset[:500]
-train_set_tags = train_set_tags[:500]
+train_set_featureset = train_set_featureset[:10000]
+train_set_tags = train_set_tags[:10000]
 
-n_split = int(len(train_set_featureset) * .7)
+n_split = int(len(train_set_featureset) * .8)
 print 'inside'
 print n_split
 
@@ -76,7 +76,7 @@ X_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 print X_test
 sample = ['ncysimianJJ', 'virusNN', 'howassaysLS']
-X_train_counts1 = count_vect.transform(sample)
+X_train_counts1 = count_vect.transform(X_test)
 X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
 print X_tfidf1.shape
 
@@ -93,7 +93,7 @@ bdt_real = AdaBoostClassifier(
 
 bdt_real.fit(X_tfidf, y_train)
 # bdt_discrete.fit(X_tfidf, y_train)
-# print bdt_real.score(X_tfidf1, y_test)
-print bdt_real.predict(X_tfidf1)
-print 'X data', X_tfidf1
-print 'decision score', bdt_real.fit(X_tfidf, y_train).decision_function(X_tfidf1)
+print bdt_real.score(X_tfidf1, y_test)
+# print bdt_real.predict(X_tfidf1)
+# print 'X data', X_tfidf1
+# print 'decision score', bdt_real.fit(X_tfidf, y_train).decision_function(X_tfidf1)

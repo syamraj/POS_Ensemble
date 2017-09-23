@@ -9,7 +9,7 @@ from sklearn.multiclass import OneVsRestClassifier
 
 import opennlp
 
-pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-perceptron-mixed.bin")
+pos = opennlp.OpenNLP("/home/devil/Thesis/apache-opennlp-1.8.0", "POSTagger", "en-pos-maxent-brown.bin")
 
 f1_overall_before_correction_list = []
 f1_overall_after_correction_list = []
@@ -199,7 +199,8 @@ def processing(train_sents):
             history.append(tag)
 
 
-training_data_size = [10000]
+training_data_size = [4000, 8000, 10000, 15000, 20000]
+# training_data_size = [100]
 
 # for training_data_size_iterator in range(len(training_data_size)):
 for training_data_size_iterator in range(len(training_data_size)):
@@ -304,11 +305,18 @@ for training_data_size_iterator in range(len(training_data_size)):
 # plot of the accuracies with increase in the training data
 print 'length of training data size', len(training_data_size)
 print 'length of f1_overall_after_correction', len(f1_overall_after_correction_list)
-# x = np.array(training_data_size)
-# y = np.array(f1_overall_after_correction_list)
-# f = interp1d(x, y)
-# f2 = interp1d(x, y, kind='cubic')
-# xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
-# plt.plot(x, y, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
-# plt.legend(['data', 'linear', 'cubic'], loc='best')
-# plt.show()
+x = np.array(training_data_size)
+y = np.array(f1_overall_after_correction_list)
+f_b = interp1d(x, y)
+f1_b = interp1d(x, y)
+f2_b = interp1d(x, y, kind='cubic')
+x1 = np.array(training_data_size)
+y1 = np.array(f1_overall_before_correction_list)
+f = interp1d(x1, y1)
+f1 = interp1d(x1, y1)
+f2 = interp1d(x1, y1, kind='cubic')
+xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
+plt.plot(x, y, 'o', xnew, f_b(xnew), '-', xnew, f2_b(xnew), '--')
+plt.plot(x1, y1, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
+plt.legend(['data', 'linear', 'cubic'], loc='best')
+plt.show()
