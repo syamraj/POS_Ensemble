@@ -7,14 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="180ae7d3-27ce-4951-b491-5f5f3bd129fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/check_brown_new_model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/check_mixed_model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/text_shuffle.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code_testing.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stack_testdata_Brown_gold" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task3.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task3_on_correction_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_Brown.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_brown_based_on_stack_testdata.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_brown_based_on_stack_testdata_gold.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/check.py" afterPath="$PROJECT_DIR$/check.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/check_brown" afterPath="$PROJECT_DIR$/check_brown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/correctionModel_Boosting.py" afterPath="$PROJECT_DIR$/correctionModel_Boosting.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -493,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502718854799</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="map + multiple text line">
+      <created>1506158774323</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1506158774324</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -516,11 +525,11 @@
   <component name="ToolWindowManager">
     <frame x="16" y="27" width="1368" height="742" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26100153" sideWeight="0.4928717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26100153" sideWeight="0.4928717" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5283333" sideWeight="0.50303954" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.79333335" sideWeight="0.4969605" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
