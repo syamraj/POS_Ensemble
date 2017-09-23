@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="180ae7d3-27ce-4951-b491-5f5f3bd129fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code_testing.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stack_testdata_Brown_gold" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task3.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task3_on_correction_model.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_Brown.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_brown_based_on_stack_testdata.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testdata_brown_based_on_stack_testdata_gold.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" afterPath="$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,8 +25,8 @@
       <file leaf-file-name="check.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5616">
-              <caret line="321" column="10" lean-forward="false" selection-start-line="194" selection-start-column="0" selection-end-line="321" selection-end-column="10" />
+            <state relative-caret-position="3392">
+              <caret line="305" column="84" lean-forward="true" selection-start-line="305" selection-start-column="84" selection-end-line="305" selection-end-column="84" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -45,50 +37,23 @@
       <file leaf-file-name="Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
-              <caret line="131" column="38" lean-forward="false" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+            <state relative-caret-position="818">
+              <caret line="450" column="8" lean-forward="true" selection-start-line="450" selection-start-column="8" selection-end-line="450" selection-end-column="8" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
+                <element signature="e#1527#1562#0" expanded="false" />
+                <element signature="e#3612#3707#0" expanded="false" />
+                <element signature="e#19437#19475#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testdata_brown_based_on_stack_testdata.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdata_brown_based_on_stack_testdata.txt">
+      <file leaf-file-name="correctionModel_Bagging.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/correctionModel_Bagging.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="80" column="7" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testdata_brown_based_on_stack_testdata_gold.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdata_brown_based_on_stack_testdata_gold.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1332">
-              <caret line="74" column="70" lean-forward="false" selection-start-line="74" selection-start-column="70" selection-end-line="74" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testdata_gold.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdata_gold.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testdata.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdata.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="10" lean-forward="false" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+            <state relative-caret-position="-276">
+              <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -112,6 +77,7 @@
       <find>cc</find>
       <find>cd</find>
       <find>ce</find>
+      <find>train_sents_learning_data</find>
     </findStrings>
     <replaceStrings>
       <replace>cc</replace>
@@ -232,7 +198,24 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.check">
+  <component name="RunManager" selected="Python.Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP">
+    <configuration name="Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="POS_Ensemble" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -332,23 +315,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="check_mixed_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="POS_Ensemble" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/check_mixed_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="correctionModel_Bagging" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -386,17 +352,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.check" />
       <item index="1" class="java.lang.String" itemvalue="Python.check_brown_new_model" />
-      <item index="2" class="java.lang.String" itemvalue="Python.check_mixed_model" />
-      <item index="3" class="java.lang.String" itemvalue="Python.correctionModel_Bagging" />
-      <item index="4" class="java.lang.String" itemvalue="Python.correctionModel_Boosting" />
+      <item index="2" class="java.lang.String" itemvalue="Python.correctionModel_Bagging" />
+      <item index="3" class="java.lang.String" itemvalue="Python.correctionModel_Boosting" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.check" />
-        <item index="1" class="java.lang.String" itemvalue="Python.correctionModel_Boosting" />
-        <item index="2" class="java.lang.String" itemvalue="Python.correctionModel_Bagging" />
-        <item index="3" class="java.lang.String" itemvalue="Python.check_brown_new_model" />
-        <item index="4" class="java.lang.String" itemvalue="Python.check_mixed_model" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP" />
+        <item index="1" class="java.lang.String" itemvalue="Python.check" />
+        <item index="2" class="java.lang.String" itemvalue="Python.correctionModel_Boosting" />
+        <item index="3" class="java.lang.String" itemvalue="Python.correctionModel_Bagging" />
+        <item index="4" class="java.lang.String" itemvalue="Python.check_brown_new_model" />
       </list>
     </recent_temporary>
   </component>
@@ -502,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506158774324</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="map + multiple text line">
+      <created>1506158897214</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1506158897214</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -524,12 +497,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="27" width="1368" height="742" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26100153" sideWeight="0.4928717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26100153" sideWeight="0.4928717" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5283333" sideWeight="0.50303954" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.79333335" sideWeight="0.4969605" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.79333335" sideWeight="0.5060698" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.79333335" sideWeight="0.4939302" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288364" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -782,13 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/correctionModel_Bagging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stack_testdata_Brown_gold">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -891,10 +858,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/correctionModel_Bagging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-276">
+          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/check.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5616">
-          <caret line="321" column="10" lean-forward="false" selection-start-line="194" selection-start-column="0" selection-end-line="321" selection-end-column="10" />
+        <state relative-caret-position="3392">
+          <caret line="305" column="84" lean-forward="true" selection-start-line="305" selection-start-column="84" selection-end-line="305" selection-end-column="84" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -903,10 +878,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="131" column="38" lean-forward="false" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+        <state relative-caret-position="818">
+          <caret line="450" column="8" lean-forward="true" selection-start-line="450" selection-start-column="8" selection-end-line="450" selection-end-column="8" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#1527#1562#0" expanded="false" />
+            <element signature="e#3612#3707#0" expanded="false" />
+            <element signature="e#19437#19475#0" expanded="false" />
           </folding>
         </state>
       </provider>
