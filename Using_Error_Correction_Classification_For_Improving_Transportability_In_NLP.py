@@ -104,7 +104,7 @@ def processing_testdata(train_sents_testdata):
             history_testdata.append(tag)
 
 # training_data_size = [500, 4000, 8000, 10000, 15000, 20000]
-training_data_size = [200]
+training_data_size = [10000]
 
 # for training_data_size_iterator in range(len(training_data_size)):
 for training_data_size_iterator in range(len(training_data_size)):
@@ -145,8 +145,6 @@ for training_data_size_iterator in range(len(training_data_size)):
     overall_fpos_after_correction = 0
     overall_fn_after_correction = 0
 
-    f1_overall_before_correction = 0
-    f1_overall_after_correction = 0
 
     predicted_class = []
     predicted_class_list = []
@@ -161,7 +159,7 @@ for training_data_size_iterator in range(len(training_data_size)):
     text_to_learn_base_error = []
     text_to_learn_base_error_only_text = []
 
-    with open(file_list[1], 'rU') as splitting:
+    with open(file_list[0], 'rU') as splitting:
         for line in splitting:
             overall_text.append(line[:-1].lstrip().rstrip())
 
@@ -427,77 +425,65 @@ for training_data_size_iterator in range(len(training_data_size)):
 
     print "F1 score before correction...", f1_overall_before_correction
 
+    # Doing the correction
+
+    token_holder_for_final_results = []
+    for k in range(len(token_holder_for_testdata_basePOS_complete)):
+        X_train_counts1 = count_vect.transform([train_set_featureset_testdata[k]])
+        X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
+        tag_to_check = token_holder_for_testdata_basePOS_complete[k].split('_')[1] + clf1.predict(X_tfidf1)[0]
+        if CorrectionClassifierX_featureset.__contains__(tag_to_check):
+            X_train_counts2 = count_vect1.transform([tag_to_check])
+            X_tfidf2 = tfidf_transformer1.transform(X_train_counts2)
+            new_pair = token_holder_for_testdata_basePOS_complete[k].split('_')[0] + '_' + CorrectionClassifier.predict(
+                X_tfidf2)[0]
+            token_holder_for_final_results.append(new_pair)
+        else:
+            new_pair = token_holder_for_testdata_basePOS_complete[k]
+            token_holder_for_final_results.append(new_pair)
+
+    print "Length of the token_holder_for_final_result...with some samples"
+    print len(token_holder_for_final_results), token_holder_for_final_results[:5]
+
     # F1 after doing the correction with CorrectionClassifier
 
-    tp = 0
-    fpos = 0
-    fn = 0
-    # testdata_line_chunks = testdata_completelist[i].split(' ')
-    # testdata_gold_line_chunks = testdata_gold_completelist[i].split(' ')
-    # print len(testdata_line_chunks)
-    # print len(testdata_gold_line_chunks)
-    if len(token_holder_for_testdata_basePOS_complete) != len(token_holder_for_testdata_complete_test_gold_all):
+    if len(token_holder_for_final_results) != len(token_holder_for_testdata_complete_test_gold_all):
         print "line number ", i, "in the file not in sync"
     else:
-        for j in range(len(token_holder_for_testdata_basePOS_complete)):
-            if token_holder_for_testdata_basePOS_complete[j].split('_')[0].upper() == \
+        for j in range(len(token_holder_for_final_results)):
+            if token_holder_for_final_results[j].split('_')[0].upper() == \
                     token_holder_for_testdata_complete_test_gold_all[j].split('/')[0].upper():
-                print token_holder_for_testdata_basePOS_complete[j].split('_')[0] + '............' + \
-                      token_holder_for_testdata_complete_test_gold_all[j].split('/')[0]
-                print token_holder_for_testdata_basePOS_complete[j].split('_')[1]
-                print "gold", token_holder_for_testdata_complete_test_gold_all[j].split('/')[1]
-                if token_holder_for_testdata_basePOS_complete[j].split('_')[1].upper() == \
+                if token_holder_for_final_results[j].split('_')[1].upper() == \
                         token_holder_for_testdata_complete_test_gold_all[j].split('/')[1].upper():
-                    tp = tp + 1
                     overall_tpos_after_correction = overall_tpos_after_correction + 1
                     # print "tp incremented"
                 else:
-
-                    text_for_correction = token_holder_for_testdata_basePOS_complete[j].split('_')[0][-3:] + \
-                                          token_holder_for_testdata_basePOS_complete[j - 1].split('_')[0]
-                    text_for_correction_list = [text_for_correction]
-
-                    X_train_counts1 = count_vect.transform(text_for_correction_list)
-                    X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
-                    new_tag = clf1.predict(X_tfidf1)
-
-                    text_for_correction1 = token_holder_for_testdata_basePOS_complete[j].split('_')[1] + new_tag[0]
-
-                    print "text for correction", text_for_correction1
-
-                    X_train_counts2 = count_vect1.transform([text_for_correction1])
-                    X_tfidf2 = tfidf_transformer1.transform(X_train_counts2)
-                    final_predicted_tag = CorrectionClassifier.predict(X_tfidf2)
-
-                    predicted_class_list.append(new_tag)
-                    # if not predicted_class.__contains__(new_tag):
-                    #     predicted_class.append(new_tag)
-                    new_wrd_tag_pair = token_holder_for_testdata_basePOS_complete[j].split('_')[0] + '_' +\
-                                       final_predicted_tag[0]
-
-                    # testdata_completelist[i].replace(token_holder_for_testdata_basePOS_complete[j], new_wrd_tag_pair)
-                    token_holder_for_testdata_basePOS_complete[j] = new_wrd_tag_pair
+                    # text_for_correction = token_holder_for_final_results[j].split('_')[0][-3:] + \
+                    #                       token_holder_for_final_results[j - 1].split('_')[0]
+                    # text_for_correction_list = [text_for_correction]
+                    # X_train_counts1 = count_vect.transform(text_for_correction_list)
+                    # X_tfidf1 = tfidf_transformer.transform(X_train_counts1)
+                    # new_tag = clf1.predict(X_tfidf1)
+                    # text_for_correction1 = token_holder_for_final_results[j].split('_')[1] + new_tag[0]
+                    # print "text for correction", text_for_correction1
+                    # X_train_counts2 = count_vect1.transform([text_for_correction1])
+                    # X_tfidf2 = tfidf_transformer1.transform(X_train_counts2)
+                    # final_predicted_tag = CorrectionClassifier.predict(X_tfidf2)
+                    # predicted_class_list.append(new_tag)
+                    # new_wrd_tag_pair = token_holder_for_final_results[j].split('_')[0] + '_' +\
+                    #                    final_predicted_tag[0]
+                    # token_holder_for_final_results[j] = new_wrd_tag_pair
                     for line in map_list:
-                        if token_holder_for_testdata_basePOS_complete[j].split('_')[0].upper() == \
+                        if token_holder_for_final_results[j].split('_')[0].upper() == \
                                 line.split('_')[0].upper():
-                            token_holder_for_testdata_basePOS_complete[j] = line[:-1]
-                    # print "############", token_holder_for_testdata_basePOS_complete[j]
-                    if token_holder_for_testdata_basePOS_complete[j].split('_')[1].upper() != \
+                            token_holder_for_final_results[j] = line[:-1]
+                    if token_holder_for_final_results[j].split('_')[1].upper() != \
                             token_holder_for_testdata_complete_test_gold_all[j].split('/')[1].upper():
-                        fpos = fpos + 1
                         overall_fpos_after_correction = overall_fpos_after_correction + 1
-                        fn = fn + 1
                         overall_fn_after_correction = overall_fn_after_correction + 1
-                    if token_holder_for_testdata_basePOS_complete[j].split('_')[1].upper() == \
+                    if token_holder_for_final_results[j].split('_')[1].upper() == \
                             token_holder_for_testdata_complete_test_gold_all[j].split('/')[1].upper():
-                        tp = tp + 1
-                        overall_tpos_after_correction = overall_tpos_after_correction
-                        # print "tp incremented"
-        # print "tp = ", tp
-        # print "fn = ", fn
-        accuracy = float(tp)*2 / float(2*tp + fn + fpos)
-        accuracy_list_after_correction.append(accuracy)
-        # print '@@@@@@@@@@@@@@@@@@@@@@@@@@@', testdata_line_chunks
+                        overall_tpos_after_correction = overall_tpos_after_correction + 1
 
     f1_overall_after_correction = float(overall_tpos_after_correction * 2) / float(2 * overall_tpos_after_correction
                                                                                    + overall_fn_after_correction
@@ -505,108 +491,3 @@ for training_data_size_iterator in range(len(training_data_size)):
 
     print "F1 score after the doing the correction from the Correction Classifier...", f1_overall_after_correction
 
-
-    # with open(file_list[1], 'rU') as fp:
-    #     for line in fp:
-    #         str = line.split(' ')
-    #         listEachLine = []
-    #         for i in str[:-1]:
-    #             if i.__contains__('_'):
-    #                 listEachLine.append((i.split('_')[0], i.split('_')[1]))
-    #         train_sents.append(listEachLine)
-
-    # processing(train_sents)
-    # print train_sents
-
-    # train_set_featureset = train_set_featureset[:training_data_size[training_data_size_iterator]]
-    # train_set_tags = train_set_tags[:training_data_size[training_data_size_iterator]]
-    #
-    # n_split = int(len(train_set_featureset) * .8)
-    #
-    # Classifier1X_train = train_set_featureset[:n_split]
-    # Classifier1Y_train = train_set_tags[:n_split]
-    #
-    # n_split1 = int(len(Classifier1X_train) * .2)
-    #
-    # Data_for_learning_from_baseX_train = Classifier1X_train[:n_split1]
-    # Data_for_learning_from_baseY_train = Classifier1Y_train[:n_split1]
-    #
-    # count_vect = CountVectorizer()
-    # tfidf_transformer = TfidfTransformer()
-    #
-    # Classifier1X_train_counts = count_vect.fit_transform(Classifier1X_train)
-    # Classifier1X_tfidf = tfidf_transformer.fit_transform(Classifier1X_train_counts)
-    #
-    # clf1 = RandomForestClassifier(n_estimators=10)
-    # clf1.fit(Classifier1X_tfidf, Classifier1Y_train)
-    #
-    # clf2 = RandomForestClassifier(n_estimators=10)
-    # clf2.fit(Classifier1X_tfidf, Classifier1Y_train)
-
-    # print(clf.score(X_tfidf1.toarray(), y_test))
-
-    # Area to give the test file
-    # with open('/home/devil/Thesis/testdata.txt','rU') as fp:
-    # with open(Genia_files[0], 'rU') as fp:
-    # with open(Brown_files[0], 'rU') as fp:
-    #     for line in fp:
-    #         line2 = pos.parse(line[:-1])
-    #         testdata_complete.append(line2.rstrip())
-
-    # Map file
-    # with open('/home/devil/Thesis/map.txt', 'rU') as fp:
-    #     for line in fp:
-    #         map_list.append(line)
-
-    # Gold file for the test purpose
-    # with open('/home/devil/Thesis/testdata_gold.txt', 'rU') as fp:
-    # with open(Genia_files[1], 'rU') as fp:
-    # with open(Brown_files[1], 'rU') as fp:
-    #     for line in fp:
-    #         testdata_gold_complete.append(line[:-1].rstrip())
-    # print testdata_complete
-    # print testdata_gold_complete
-    # print 'accuracy before correction', accuracy_pos(testdata_complete, testdata_gold_complete)
-    # print "..........................................................................................................."
-    # print 'accuracy after correction', accuracy_pos_withcorrection(testdata_complete, testdata_gold_complete, map_list)
-    #
-    # f1_overall_before_correction = float(overall_tpos_before_correction * 2) / \
-    #                                float(2 * overall_tpos_before_correction + overall_fn_before_correction
-    #                                      + overall_fpos_before_correction)
-    # f1_overall_before_correction_list.append(f1_overall_before_correction)
-    #
-    # f1_overall_after_correction = float(overall_tpos_after_correction * 2) / float(
-    #     2 * overall_tpos_after_correction
-    #     + overall_fn_after_correction
-    #     + overall_fpos_after_correction)
-    # f1_overall_after_correction_list.append(f1_overall_after_correction)
-    #
-    # print "printing the result", accracy_list_before_correction
-    # print "printing the result after correction", accuracy_list_after_correction
-    #
-    # print "length of accuracy list before correction", len(accracy_list_before_correction)
-    # print "length of accuracy list after correction", len(accuracy_list_after_correction)
-    #
-    # print "overall F1 score after correction", f1_overall_after_correction
-    # print "overall F1 score before correction", f1_overall_before_correction
-
-
-    # plot of the accuracies with increase in the training data
-    # print 'length of training data size', len(training_data_size)
-    # print 'length of f1_overall_after_correction', len(f1_overall_after_correction_list)
-    # print 'f1_overall_after_correction', f1_overall_after_correction_list
-    # x = np.array(training_data_size)
-    # y = np.array(f1_overall_after_correction_list)
-    # f_b = interp1d(x, y)
-    # f1_b = interp1d(x, y)
-    # f2_b = interp1d(x, y, kind='cubic')
-    # x1 = np.array(training_data_size)
-    # y1 = np.array(f1_overall_before_correction_list)
-    # f = interp1d(x1, y1)
-    # f1 = interp1d(x1, y1)
-    # f2 = interp1d(x1, y1, kind='cubic')
-    # xnew = np.linspace(training_data_size[0], training_data_size[len(training_data_size)-1], num=41, endpoint=True)
-    # plt.plot(x, y, 'o', xnew, f_b(xnew), '-', xnew, f2_b(xnew), '--')
-    # plt.plot(x1, y1, 'o', xnew, f(xnew), '-', xnew, f2(xnew), '--')
-    # plt.legend(['data', 'linear', 'cubic'], loc='best')
-    # plt.show()

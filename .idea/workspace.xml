@@ -25,7 +25,7 @@
       <file leaf-file-name="check.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/check.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="2232">
               <caret line="256" column="0" lean-forward="false" selection-start-line="256" selection-start-column="0" selection-end-line="258" selection-end-column="33" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -37,11 +37,10 @@
       <file leaf-file-name="Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="464" column="20" lean-forward="true" selection-start-line="464" selection-start-column="20" selection-end-line="464" selection-end-column="20" />
+            <state relative-caret-position="332">
+              <caret line="334" column="23" lean-forward="true" selection-start-line="334" selection-start-column="23" selection-end-line="334" selection-end-column="23" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
-                <element signature="e#21877#21915#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -80,6 +79,7 @@
       <find>testdata_complete_test</find>
       <find>fpos</find>
       <find>map_list</find>
+      <find>f1_overall_before_correction</find>
     </findStrings>
     <replaceStrings>
       <replace>cc</replace>
@@ -484,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506186595957</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updated Architecture">
+      <created>1506261182172</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1506261182172</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -539,7 +546,8 @@
     <MESSAGE value="task 1 added" />
     <MESSAGE value="processing multiple files" />
     <MESSAGE value="map + multiple text line" />
-    <option name="LAST_COMMIT_MESSAGE" value="map + multiple text line" />
+    <MESSAGE value="Updated Architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -873,7 +881,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/check.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
+        <state relative-caret-position="2232">
           <caret line="256" column="0" lean-forward="false" selection-start-line="256" selection-start-column="0" selection-end-line="258" selection-end-column="33" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
@@ -883,11 +891,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Using_Error_Correction_Classification_For_Improving_Transportability_In_NLP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="464" column="20" lean-forward="true" selection-start-line="464" selection-start-column="20" selection-end-line="464" selection-end-column="20" />
+        <state relative-caret-position="332">
+          <caret line="334" column="23" lean-forward="true" selection-start-line="334" selection-start-column="23" selection-end-line="334" selection-end-column="23" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-            <element signature="e#21877#21915#0" expanded="false" />
           </folding>
         </state>
       </provider>
